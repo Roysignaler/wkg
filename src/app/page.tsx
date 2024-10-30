@@ -31,16 +31,19 @@ export default function Home() {
   // Extract current level and next level data
   const wpk = parseFloat(result.split(": ")[1]) || 0;
   const { currentLevel, nextLevel } = (() => {
-    // Ensure gender is of type 'male' or 'female'
-    const selectedLevels = levels[gender as keyof typeof levels];
-    let current = null,
-      next = null;
+    // Safely get the levels based on gender or fallback to an empty array
+    const selectedLevels = levels[gender as keyof typeof levels] || [];
+
+    let current = null;
+    let next = null;
 
     for (let i = 0; i < selectedLevels.length; i++) {
       const level = selectedLevels[i];
+
+      // Check if wpk falls within the current level's range
       if (wpk >= level.min && (level.max === undefined || wpk < level.max)) {
         current = level;
-        next = selectedLevels[i - 1] || null;
+        next = selectedLevels[i + 1] || null; // Use the next item in the array as next level
         break;
       }
     }
