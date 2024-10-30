@@ -48,13 +48,13 @@ const CyclingPerformanceTable = () => {
         <tbody>
           {data.map((row, index) => (
             <tr key={index} className="even:bg-white odd:bg-gray-50">
-              <td className="px-6 py-3 text-center text-gray-800 font-medium">
+              <td className="px-4 py-1 text-center text-gray-800 font-medium">
                 {row.level}
               </td>
-              <td className="px-6 py-3 text-center text-gray-800">
+              <td className="px-4 py-1 text-center text-gray-800">
                 {row.maleWkg}
               </td>
-              <td className="px-6 py-3 text-center text-gray-800">
+              <td className="px-4 py-1 text-center text-gray-800">
                 {row.femaleWkg}
               </td>
             </tr>

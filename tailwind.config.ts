@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const { blackA, violet } = require("@radix-ui/colors");
 
 const config: Config = {
     darkMode: ["class"],
@@ -10,8 +11,12 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+			...blackA,
+			...violet,
 			'color-bright-100': '#0000FF',
 			'color-bright-200': '#000000',
+			'warm-border': '#FFD8C2',
+			'cool-border': '#C2E3FF',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

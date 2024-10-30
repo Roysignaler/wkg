@@ -4,6 +4,7 @@ import { useState } from "react";
 import WattToKgCalculator from "./components/WattToKgCalculator";
 import { Button } from "@/components/ui/button";
 import { ArrowDownIcon, SunIcon } from "@radix-ui/react-icons";
+import CyclingPerformanceTable from "@/components/ui/watt-per-kilo-table";
 
 export default function Home() {
   const [isWarmTheme, setIsWarmTheme] = useState(false);
@@ -79,30 +80,15 @@ export default function Home() {
       </header>
       <main className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-screen-xl mx-auto py-4">
         {/* Center content - Show first on mobile */}
-        <div className="order-1 md:order-2 p-4 bg-slate-400">
-          <p id="main-content">
-            <WattToKgCalculator />
+        <div className="order-1 md:order-2 p-4 flex justify-center items-center">
+          <p id="main-content" className={isWarmTheme ? "" : ""}>
+            <WattToKgCalculator isWarmTheme={isWarmTheme} />
           </p>
         </div>
 
         {/* Left side - Show second on mobile */}
         <div className="order-2 md:order-1 p-4 bg-gray-100">
-          <p>Left Side Content</p>
-          <table>
-            <thead>
-              <tr>
-                <th>Data</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Example Data</td>
-                <td>123</td>
-              </tr>
-              {/* Additional rows */}
-            </tbody>
-          </table>
+          <CyclingPerformanceTable />
         </div>
 
         {/* Right side - Show third on mobile */}
