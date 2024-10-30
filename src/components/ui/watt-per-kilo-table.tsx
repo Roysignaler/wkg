@@ -1,6 +1,12 @@
 import React from "react";
 
-const CyclingPerformanceTable = () => {
+interface CyclingPerformanceTableProps {
+  isWarmTheme: boolean;
+}
+
+const CyclingPerformanceTable = ({
+  isWarmTheme,
+}: CyclingPerformanceTableProps) => {
   const data = [
     { level: "World Class", maleWkg: "≥ 5.8", femaleWkg: "≥ 5.1" },
     { level: "Exceptional", maleWkg: "5.3 - 5.8", femaleWkg: "4.6 - 5.1" },
@@ -31,30 +37,71 @@ const CyclingPerformanceTable = () => {
 
   return (
     <div className="flex justify-center mt-8">
-      <table className="min-w-full border border-gray-200 shadow-lg">
+      <table
+        className={`min-w-full border shadow-lg ${
+          isWarmTheme
+            ? "border-[#FFD8C2] bg-[#FFF2E5]"
+            : "border-[#C2E3FF] bg-[#EBF5FF]"
+        }`}
+      >
         <thead>
-          <tr className="bg-gray-100">
-            <th className="px-6 py-3 text-center text-gray-600 font-semibold">
+          <tr className={isWarmTheme ? "bg-[#FFD8C2]" : "bg-[#C2E3FF]"}>
+            <th
+              className={`px-6 py-3 text-center font-semibold ${
+                isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
+              }`}
+            >
               Level
             </th>
-            <th className="px-6 py-3 text-center text-gray-600 font-semibold">
+            <th
+              className={`px-6 py-3 text-center font-semibold ${
+                isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
+              }`}
+            >
               W/kg Males
             </th>
-            <th className="px-6 py-3 text-center text-gray-600 font-semibold">
+            <th
+              className={`px-6 py-3 text-center font-semibold ${
+                isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
+              }`}
+            >
               W/kg Females
             </th>
           </tr>
         </thead>
         <tbody>
           {data.map((row, index) => (
-            <tr key={index} className="even:bg-white odd:bg-gray-50">
-              <td className="px-4 py-1 text-center text-gray-800 font-medium">
+            <tr
+              key={index}
+              className={
+                isWarmTheme
+                  ? index % 2 === 0
+                    ? "bg-[#FFEBD4]"
+                    : "bg-[#FFF7E8]"
+                  : index % 2 === 0
+                  ? "bg-[#E3F2FF]"
+                  : "bg-[#F0F8FF]"
+              }
+            >
+              <td
+                className={`px-4 py-2 text-center font-medium ${
+                  isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
+                }`}
+              >
                 {row.level}
               </td>
-              <td className="px-4 py-1 text-center text-gray-800">
+              <td
+                className={`px-4 py-2 text-center ${
+                  isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
+                }`}
+              >
                 {row.maleWkg}
               </td>
-              <td className="px-4 py-1 text-center text-gray-800">
+              <td
+                className={`px-4 py-2 text-center ${
+                  isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
+                }`}
+              >
                 {row.femaleWkg}
               </td>
             </tr>

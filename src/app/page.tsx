@@ -8,6 +8,7 @@ import CyclingPerformanceTable from "@/components/ui/watt-per-kilo-table";
 
 export default function Home() {
   const [isWarmTheme, setIsWarmTheme] = useState(false);
+  const [result, setResult] = useState(""); // Lifted state for result
 
   // Toggle theme handler
   const toggleTheme = () => setIsWarmTheme((prev) => !prev);
@@ -82,20 +83,24 @@ export default function Home() {
         {/* Center content - Show first on mobile */}
         <div className="order-1 md:order-2 p-4 flex justify-center items-center">
           <p id="main-content" className={isWarmTheme ? "" : ""}>
-            <WattToKgCalculator isWarmTheme={isWarmTheme} />
+            <WattToKgCalculator
+              isWarmTheme={isWarmTheme}
+              result={result}
+              setResult={setResult}
+            />
           </p>
         </div>
 
         {/* Left side - Show second on mobile */}
         <div className="order-2 md:order-1 p-4 bg-gray-100">
-          <CyclingPerformanceTable />
+          <CyclingPerformanceTable isWarmTheme={isWarmTheme} />
         </div>
 
         {/* Right side - Show third on mobile */}
         <div className="order-3 md:order-3 p-4 bg-gray-100">
           <p>Right Side Content</p>
           <div>
-            <p>Results go here</p>
+            <p>{result ? result : "Results go here"}</p>
           </div>
         </div>
       </main>

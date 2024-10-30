@@ -1,32 +1,32 @@
 "use client";
 
-import { useState } from "react";
-import * as Slider from "@/components/ui/slider";
+import { useState, useEffect } from "react";
 import CustomSlider from "./CustomSlider";
 
 interface WattToKgCalculatorProps {
   isWarmTheme: boolean;
+  result: string;
+  setResult: (value: string) => void;
 }
 
 export default function WattToKgCalculator({
   isWarmTheme,
+  result,
+  setResult,
 }: WattToKgCalculatorProps) {
   const [watts, setWatts] = useState("160");
   const [kg, setKg] = useState("90");
-  const [result, setResult] = useState("");
 
-  const handleCalculate = () => {
+  // Calculate W/kg whenever watts or kg changes
+  useEffect(() => {
     if (kg && watts) {
       const wattsPerKg = parseFloat(watts) / parseFloat(kg);
       setResult(`W/kg: ${wattsPerKg.toFixed(2)}`);
     } else {
       setResult("Please enter both watts and kg.");
     }
-  };
+  }, [watts, kg, setResult]);
 
-  const handleSliderChange = (value: number) => {
-    setWatts(value.toString()); // Update watts when slider moves
-  };
   const handleSliderChangeWatts = (value: number) => setWatts(value.toString());
   const handleSliderChangeKg = (value: number) => setKg(value.toString());
 
@@ -40,7 +40,7 @@ export default function WattToKgCalculator({
         Watt to KG Calculator
       </h2>
 
-      {/* Watts Slider - starts at 160 */}
+      {/* Watts Input - with "watt" label */}
       <div className="relative w-full max-w-xs">
         <input
           type="number"
@@ -62,11 +62,11 @@ export default function WattToKgCalculator({
         onValueChange={(value) => handleSliderChangeWatts(value[0])}
         max={750}
         step={1}
-        defaultValue={160} // Starts at 160
+        defaultValue={160}
         isWarmTheme={isWarmTheme}
       />
 
-      {/* Kg Slider - starts at 90 */}
+      {/* Kg Input - with "kg" label */}
       <div className="relative w-full max-w-xs">
         <input
           type="number"
@@ -88,19 +88,11 @@ export default function WattToKgCalculator({
         onValueChange={(value) => handleSliderChangeKg(value[0])}
         max={200}
         step={1}
-        defaultValue={90} // Starts at 90
+        defaultValue={90}
         isWarmTheme={isWarmTheme}
       />
 
-      <button
-        onClick={handleCalculate}
-        className={`${
-          isWarmTheme ? "bg-[#F94807]" : "bg-blue-500"
-        } text-white px-4 py-2 rounded w-full max-w-xs`}
-      >
-        Calculate W/kg
-      </button>
-
+      {/* Result displayed here in main content */}
       {result && <p className="mt-4 text-sm text-gray-700">{result}</p>}
     </div>
   );
