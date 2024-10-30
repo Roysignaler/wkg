@@ -1,63 +1,71 @@
+// pages/index.tsx
+
 "use client";
-import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WattToKgCalculator from "./components/WattToKgCalculator";
+import CyclingPerformanceTable from "@/components/ui/watt-per-kilo-table";
+import { levels } from "@/components/data/levelsData";
 import { Button } from "@/components/ui/button";
 import { ArrowDownIcon, SunIcon } from "@radix-ui/react-icons";
-import CyclingPerformanceTable from "@/components/ui/watt-per-kilo-table";
 
 export default function Home() {
   const [isWarmTheme, setIsWarmTheme] = useState(false);
-  const [result, setResult] = useState(""); // Lifted state for result
+  const [result, setResult] = useState("");
+  const [watts, setWatts] = useState("160");
+  const [kg, setKg] = useState("90");
+  const [gender, setGender] = useState<"male" | "female">("male");
 
   // Toggle theme handler
   const toggleTheme = () => setIsWarmTheme((prev) => !prev);
 
+  // Calculate W/kg and determine level data
+  useEffect(() => {
+    if (kg && watts) {
+      const wpk = parseFloat(watts) / parseFloat(kg);
+      setResult(`W/kg: ${wpk.toFixed(2)}`);
+    } else {
+      setResult("Please enter both watts and kg.");
+    }
+  }, [watts, kg]);
+
+  // Extract current level and next level data
+  const wpk = parseFloat(result.split(": ")[1]) || 0;
+  const { currentLevel, nextLevel } = (() => {
+    // Ensure gender is of type 'male' or 'female'
+    const selectedLevels = levels[gender as keyof typeof levels];
+    let current = null,
+      next = null;
+
+    for (let i = 0; i < selectedLevels.length; i++) {
+      const level = selectedLevels[i];
+      if (wpk >= level.min && (level.max === undefined || wpk < level.max)) {
+        current = level;
+        next = selectedLevels[i - 1] || null;
+        break;
+      }
+    }
+
+    return { currentLevel: current, nextLevel: next };
+  })();
+
   return (
     <div className="flex flex-col items-center min-h-screen">
-      {/* Full-width banner */}
       <header
         className={`w-full p-4 ${
           isWarmTheme ? "bg-[#F94807]" : "bg-color-bright-100"
         } text-white`}
       >
-        {/* Banner with full width */}
         <div className="max-w-screen-xl mx-auto border-b-[10px] border-white">
-          <p>
-            Beta -{" "}
-            <a
-              href="https://forms.gle/aDMDVmzJjn95rDT97"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 underline"
-            >
-              Give anonymous feedback
-            </a>{" "}
-            or{" "}
-            <a
-              href="https://x.com/intent/post?text=WattPerKilogram.App+from+%40roysignaler++%0A%0A"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 underline"
-            >
-              tweet it
-            </a>
-            .
-          </p>
+          <p>Beta - Give feedback or tweet it.</p>
         </div>
-
-        {/* Grid layout for spaced content */}
         <div className="grid grid-cols-3 gap-4 max-w-screen-xl mx-auto py-4">
-          {/* Button to scroll to Main Content */}
           <div className="flex justify-start items-center">
             <Button
               variant="ghost"
               onClick={() => {
                 const mainContent = document.getElementById("main-content");
                 if (mainContent) {
-                  mainContent.scrollIntoView({
-                    behavior: "smooth",
-                  });
+                  mainContent.scrollIntoView({ behavior: "smooth" });
                 }
               }}
               className="px-1 py-2"
@@ -66,42 +74,85 @@ export default function Home() {
             </Button>
           </div>
 
-          {/* Central text */}
           <div className="flex justify-center items-center text-center">
-            <p>Essential tool for cyclists </p>
+            <p>Essential tool for cyclists</p>
           </div>
 
-          {/* Theme toggle button */}
           <div className="flex justify-end items-center">
-            <button onClick={toggleTheme} className=" px-4 py-2 rounded">
+            <button onClick={toggleTheme} className="px-4 py-2 rounded">
               <SunIcon />
             </button>
           </div>
         </div>
       </header>
-      <main className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-screen-xl mx-auto py-4">
-        {/* Center content - Show first on mobile */}
-        <div className="order-1 md:order-2 p-4 flex justify-center items-center">
-          <p id="main-content" className={isWarmTheme ? "" : ""}>
-            <WattToKgCalculator
-              isWarmTheme={isWarmTheme}
-              result={result}
-              setResult={setResult}
-            />
+      <main className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 w-full max-w-screen-xl mx-auto py-4">
+        {/* Center content - Set to appear first on medium screens (768px - 1023px) */}
+        <div className="order-1 md:order-1 lg:order-2 p-4 flex justify-center items-center">
+          <WattToKgCalculator
+            isWarmTheme={isWarmTheme}
+            result={result}
+            setResult={setResult}
+            watts={watts}
+            setWatts={setWatts}
+            kg={kg}
+            setKg={setKg}
+            gender={gender}
+            setGender={setGender}
+          />
+        </div>
+
+        {/* Left side - Set to appear second on medium screens (768px - 1023px) */}
+        <div className="order-2 md:order-2 lg:order-1 p-4 flex justify-center items-center">
+          <CyclingPerformanceTable
+            isWarmTheme={isWarmTheme}
+            result={wpk}
+            gender={gender}
+          />
+        </div>
+
+        {/* Right side - Remains last on all screen sizes */}
+        <div className="order-3 md:order-3 lg:order-3 p-4">
+          <h3 className="text-lg font-semibold mb-2">Summary</h3>
+          <p>
+            <strong>Gender:</strong>{" "}
+            {gender.charAt(0).toUpperCase() + gender.slice(1)}
           </p>
-        </div>
+          <p>
+            <strong>Power:</strong> {watts} watts
+          </p>
+          <p>
+            <strong>Weight:</strong> {kg} kg
+          </p>
+          <p>
+            <strong>Formula:</strong> {watts} W / {kg} kg = {result}
+          </p>
 
-        {/* Left side - Show second on mobile */}
-        <div className="order-2 md:order-1 p-4 bg-gray-100">
-          <CyclingPerformanceTable isWarmTheme={isWarmTheme} />
-        </div>
-
-        {/* Right side - Show third on mobile */}
-        <div className="order-3 md:order-3 p-4 bg-gray-100">
-          <p>Right Side Content</p>
-          <div>
-            <p>{result ? result : "Results go here"}</p>
-          </div>
+          {currentLevel && (
+            <div className="mt-4">
+              <h4 className="text-md font-semibold">
+                Fitness Level: {currentLevel.name}
+              </h4>
+              <p className="text-sm mt-1">{currentLevel.description}</p>
+              <h5 className="mt-3 font-medium">Typical Week:</h5>
+              <ul className="pl-5 text-sm text-gray-700 space-y-1">
+                <li>Rides per week: {currentLevel.typicalWeek.ridesPerWeek}</li>
+                <li>
+                  Weekly distance: {currentLevel.typicalWeek.weeklyDistance}
+                </li>
+                <li>
+                  One-day endurance: {currentLevel.typicalWeek.oneDayEndurance}
+                </li>
+                <li>Average speed: {currentLevel.typicalWeek.avgSpeed}</li>
+              </ul>
+              {nextLevel && (
+                <p className="mt-3 text-sm text-gray-500">
+                  You need an additional{" "}
+                  <strong>{(nextLevel.min - wpk).toFixed(2)} W/kg</strong> to
+                  reach the next level: <strong>{nextLevel.name}</strong>.
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </main>
     </div>

@@ -1,10 +1,14 @@
 import React from "react";
 
 interface CyclingPerformanceTableProps {
+  result: number; // Pass W/kg result as a prop
+  gender: string; // Pass gender as a prop
   isWarmTheme: boolean;
 }
 
 const CyclingPerformanceTable = ({
+  result,
+  gender,
   isWarmTheme,
 }: CyclingPerformanceTableProps) => {
   const data = [
@@ -35,77 +39,57 @@ const CyclingPerformanceTable = ({
     { level: "Novice 1", maleWkg: "1.3 - 1.7", femaleWkg: "1.3 - 1.9" },
   ];
 
+  // Helper function to check if result falls within a range
+  const isInRange = (range: string, result: number) => {
+    const [low, high] = range.split(" - ").map(parseFloat);
+    if (range.includes("≥")) {
+      const min = parseFloat(range.replace("≥ ", ""));
+      return result >= min;
+    }
+    return result >= low && (high === undefined || result <= high);
+  };
+
   return (
     <div className="flex justify-center mt-8">
-      <table
-        className={`min-w-full border shadow-lg ${
-          isWarmTheme
-            ? "border-[#FFD8C2] bg-[#FFF2E5]"
-            : "border-[#C2E3FF] bg-[#EBF5FF]"
-        }`}
-      >
+      <table className="min-w-full border border-gray-200 shadow-lg">
         <thead>
-          <tr className={isWarmTheme ? "bg-[#FFD8C2]" : "bg-[#C2E3FF]"}>
-            <th
-              className={`px-6 py-3 text-center font-semibold ${
-                isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
-              }`}
-            >
+          <tr className={`${isWarmTheme ? "bg-[#FFD8C2]" : "bg-[#C2E3FF]"}`}>
+            <th className="px-6 py-3 text-center text-gray-600 font-semibold">
               Level
             </th>
-            <th
-              className={`px-6 py-3 text-center font-semibold ${
-                isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
-              }`}
-            >
+            <th className="px-6 py-3 text-center text-gray-600 font-semibold">
               W/kg Males
             </th>
-            <th
-              className={`px-6 py-3 text-center font-semibold ${
-                isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
-              }`}
-            >
+            <th className="px-6 py-3 text-center text-gray-600 font-semibold">
               W/kg Females
             </th>
           </tr>
         </thead>
         <tbody>
-          {data.map((row, index) => (
-            <tr
-              key={index}
-              className={
-                isWarmTheme
-                  ? index % 2 === 0
-                    ? "bg-[#FFEBD4]"
-                    : "bg-[#FFF7E8]"
-                  : index % 2 === 0
-                  ? "bg-[#E3F2FF]"
-                  : "bg-[#F0F8FF]"
-              }
-            >
-              <td
-                className={`px-4 py-2 text-center font-medium ${
-                  isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
+          {data.map((row, index) => {
+            const isHighlighted =
+              (gender === "male" && isInRange(row.maleWkg, result)) ||
+              (gender === "female" && isInRange(row.femaleWkg, result));
+
+            return (
+              <tr
+                key={index}
+                className={`${
+                  isHighlighted
+                    ? `${
+                        isWarmTheme ? "bg-[#F1A07A]" : "bg-[#A4C7E1]"
+                      } font-bold`
+                    : index % 2 === 0
+                    ? "bg-white"
+                    : "bg-gray-50"
                 }`}
               >
-                {row.level}
-              </td>
-              <td
-                className={`px-4 py-2 text-center ${
-                  isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
-                }`}
-              >
-                {row.maleWkg}
-              </td>
-              <td
-                className={`px-4 py-2 text-center ${
-                  isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
-                }`}
-              >
-                {row.femaleWkg}
-              </td>
-            </tr>
-          ))}
+                <td className="px-4 py-1 text-center">{row.level}</td>
+                <td className="px-4 py-1 text-center">{row.maleWkg}</td>
+                <td className="px-4 py-1 text-center">{row.femaleWkg}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

@@ -1,31 +1,42 @@
+// WattToKgCalculator.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import CustomSlider from "./CustomSlider";
+import CustomToggleGroup from "./CustomToggleGroup";
 
 interface WattToKgCalculatorProps {
   isWarmTheme: boolean;
   result: string;
-  setResult: (value: string) => void;
+  setResult: Dispatch<SetStateAction<string>>;
+  watts: string;
+  setWatts: Dispatch<SetStateAction<string>>;
+  kg: string;
+  setKg: Dispatch<SetStateAction<string>>;
+  gender: "male" | "female"; // Updated to only accept "male" or "female"
+  setGender: Dispatch<SetStateAction<"male" | "female">>; // Updated to accept only "male" or "female"
 }
 
 export default function WattToKgCalculator({
   isWarmTheme,
   result,
   setResult,
+  watts,
+  setWatts,
+  kg,
+  setKg,
+  gender,
+  setGender,
 }: WattToKgCalculatorProps) {
-  const [watts, setWatts] = useState("160");
-  const [kg, setKg] = useState("90");
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Calculate W/kg whenever watts or kg changes
   useEffect(() => {
-    if (kg && watts) {
-      const wattsPerKg = parseFloat(watts) / parseFloat(kg);
-      setResult(`W/kg: ${wattsPerKg.toFixed(2)}`);
-    } else {
-      setResult("Please enter both watts and kg.");
-    }
-  }, [watts, kg, setResult]);
+    // Check window width to determine if device is mobile
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleSliderChangeWatts = (value: number) => setWatts(value.toString());
   const handleSliderChangeKg = (value: number) => setKg(value.toString());
@@ -40,7 +51,7 @@ export default function WattToKgCalculator({
         Watt to KG Calculator
       </h2>
 
-      {/* Watts Input - with "watt" label */}
+      {/* Watts Input */}
       <div className="relative w-full max-w-xs">
         <input
           type="number"
@@ -66,7 +77,7 @@ export default function WattToKgCalculator({
         isWarmTheme={isWarmTheme}
       />
 
-      {/* Kg Input - with "kg" label */}
+      {/* Kg Input */}
       <div className="relative w-full max-w-xs">
         <input
           type="number"
@@ -92,8 +103,30 @@ export default function WattToKgCalculator({
         isWarmTheme={isWarmTheme}
       />
 
-      {/* Result displayed here in main content */}
-      {result && <p className="mt-4 text-sm text-gray-700">{result}</p>}
+      {/* Gender Toggle Group */}
+      <CustomToggleGroup
+        value={gender}
+        onValueChange={setGender}
+        isWarmTheme={isWarmTheme}
+      />
+
+      {/* Result displayed here on mobile */}
+      {isMobile && result && (
+        <>
+          <p className="mt-4 text-sm text-gray-700">{result}</p>
+          <button
+            onClick={() => {
+              const summarySection = document.getElementById("summary");
+              if (summarySection) {
+                summarySection.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className="mt-4 px-4 py-2 rounded bg-blue-500 text-white"
+          >
+            Explore Results
+          </button>
+        </>
+      )}
     </div>
   );
 }
