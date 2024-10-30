@@ -59,9 +59,19 @@ export default function Home() {
         } text-white`}
       >
         <div className="max-w-screen-xl mx-auto border-b-[10px] border-white">
-          <p>Beta - Give feedback or tweet it.</p>
+          <p className="pb-4 text-base">
+            <strong>Beta</strong> -{" "}
+            <a href="https://forms.gle/aDMDVmzJjn95rDT97">
+              <u>Give feedback</u>
+            </a>{" "}
+            or{" "}
+            <a href="https://twitter.com/intent/tweet?text=WattPerKilogram.App%20from%20@roysignaler%20%20%0A%0A">
+              <u>tweet it</u>
+            </a>
+            .
+          </p>
         </div>
-        <div className="grid grid-cols-3 gap-4 max-w-screen-xl mx-auto py-4">
+        <div className="grid grid-cols-3 gap-4 max-w-screen-xl mx-auto py-4 text-lg">
           <div className="flex justify-start items-center">
             <Button
               variant="ghost"
@@ -73,7 +83,7 @@ export default function Home() {
               }}
               className="px-1 py-2"
             >
-              <ArrowDownIcon /> Explore
+              <ArrowDownIcon /> <strong className="md:text-lg">Explore</strong>
             </Button>
           </div>
 
