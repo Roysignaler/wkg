@@ -77,24 +77,40 @@ export default function Home() {
           </div>
         </div>
       </header>
-
-      {/* Main content area with two side sections */}
-      <main className="flex justify-center w-full max-w-screen-xl mx-auto py-4">
-        {/* Left side (div) */}
-        <div className="hidden md:block w-1/4 py-4">
-          <p>Left Side Content</p>
-        </div>
-
-        {/* Center content */}
-        <div className="w-full md:w-1/2 py-4 bg-slate-400">
+      <main className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-screen-xl mx-auto py-4">
+        {/* Center content - Show first on mobile */}
+        <div className="order-1 md:order-2 p-4 bg-slate-400">
           <p id="main-content">
             <WattToKgCalculator />
           </p>
         </div>
 
-        {/* Right side (div) */}
-        <div className="hidden md:block w-1/4 p-4">
+        {/* Left side - Show second on mobile */}
+        <div className="order-2 md:order-1 p-4 bg-gray-100">
+          <p>Left Side Content</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Example Data</td>
+                <td>123</td>
+              </tr>
+              {/* Additional rows */}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Right side - Show third on mobile */}
+        <div className="order-3 md:order-3 p-4 bg-gray-100">
           <p>Right Side Content</p>
+          <div>
+            <p>Results go here</p>
+          </div>
         </div>
       </main>
     </div>
