@@ -50,7 +50,7 @@ const CyclingPerformanceTable = ({
   };
 
   return (
-    <div className="flex justify-center mt-8">
+    <div className="flex justify-center ">
       <table className="min-w-full border border-gray-200 shadow-lg">
         <thead>
           <tr className={`${isWarmTheme ? "bg-[#FFD8C2]" : "bg-[#C2E3FF]"}`}>

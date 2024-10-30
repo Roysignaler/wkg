@@ -102,7 +102,7 @@ export default function Home() {
         </div>
 
         {/* Left side - Set to appear second on medium screens (768px - 1023px) */}
-        <div className="order-2 md:order-2 lg:order-1 p-4 flex justify-center items-center">
+        <div className="order-2 md:order-2 lg:order-1 p-4 flex justify-center items-start">
           <CyclingPerformanceTable
             isWarmTheme={isWarmTheme}
             result={wpk}
@@ -110,49 +110,83 @@ export default function Home() {
           />
         </div>
 
-        {/* Right side - Remains last on all screen sizes */}
-        <div className="order-3 md:order-3 lg:order-3 p-4">
-          <h3 className="text-lg font-semibold mb-2">Summary</h3>
-          <p>
-            <strong>Gender:</strong>{" "}
-            {gender.charAt(0).toUpperCase() + gender.slice(1)}
-          </p>
-          <p>
-            <strong>Power:</strong> {watts} watts
-          </p>
-          <p>
-            <strong>Weight:</strong> {kg} kg
-          </p>
-          <p>
-            <strong>Formula:</strong> {watts} W / {kg} kg = {result}
-          </p>
+        {/* Right side - Summary with theme-based styling */}
+        <div
+          className={`order-3 md:order-3 lg:order-3 p-4 flex items-start ${
+            isWarmTheme
+              ? "bg-[#FFF5EB] text-[#8B4000]"
+              : "bg-[#F0F8FF] text-[#1B4D89]"
+          }`}
+        >
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Summary</h3>
+            <p>
+              <strong>Gender:</strong>{" "}
+              {gender.charAt(0).toUpperCase() + gender.slice(1)}
+            </p>
+            <p>
+              <strong>Power:</strong> {watts} watts
+            </p>
+            <p>
+              <strong>Weight:</strong> {kg} kg
+            </p>
+            <p>
+              <strong>Formula:</strong> {watts} W / {kg} kg = {result}
+            </p>
 
-          {currentLevel && (
-            <div className="mt-4">
-              <h4 className="text-md font-semibold">
-                Fitness Level: {currentLevel.name}
-              </h4>
-              <p className="text-sm mt-1">{currentLevel.description}</p>
-              <h5 className="mt-3 font-medium">Typical Week:</h5>
-              <ul className="pl-5 text-sm text-gray-700 space-y-1">
-                <li>Rides per week: {currentLevel.typicalWeek.ridesPerWeek}</li>
-                <li>
-                  Weekly distance: {currentLevel.typicalWeek.weeklyDistance}
-                </li>
-                <li>
-                  One-day endurance: {currentLevel.typicalWeek.oneDayEndurance}
-                </li>
-                <li>Average speed: {currentLevel.typicalWeek.avgSpeed}</li>
-              </ul>
-              {nextLevel && (
-                <p className="mt-3 text-sm text-gray-500">
-                  You need an additional{" "}
-                  <strong>{(nextLevel.min - wpk).toFixed(2)} W/kg</strong> to
-                  reach the next level: <strong>{nextLevel.name}</strong>.
+            {currentLevel && (
+              <div className="mt-4">
+                <h4
+                  className={`text-md font-semibold ${
+                    isWarmTheme ? "text-[#CC5500]" : "text-[#0A1833]"
+                  }`}
+                >
+                  Fitness Level: {currentLevel.name}
+                </h4>
+                <p
+                  className={`text-sm mt-1 ${
+                    isWarmTheme ? "text-[#994400]" : "text-[#2A527D]"
+                  }`}
+                >
+                  {currentLevel.description}
                 </p>
-              )}
-            </div>
-          )}
+                <h5
+                  className={`mt-3 font-medium ${
+                    isWarmTheme ? "text-[#CC5500]" : "text-[#0A1833]"
+                  }`}
+                >
+                  Typical Week:
+                </h5>
+                <div
+                  className={` text-sm ${
+                    isWarmTheme ? "text-[#8B4000]" : "text-[#1B4D89]"
+                  } space-y-1`}
+                >
+                  <p>Rides per week: {currentLevel.typicalWeek.ridesPerWeek}</p>
+                  <p>
+                    Weekly distance: {currentLevel.typicalWeek.weeklyDistance}
+                  </p>
+                  <p>
+                    One-day endurance:{" "}
+                    {currentLevel.typicalWeek.oneDayEndurance}
+                  </p>
+                  <p>Average speed: {currentLevel.typicalWeek.avgSpeed}</p>
+                </div>
+
+                {nextLevel && (
+                  <p
+                    className={`mt-3 text-sm ${
+                      isWarmTheme ? "text-[#CC5500]" : "text-[#2A527D]"
+                    }`}
+                  >
+                    You need an additional{" "}
+                    <strong>{(nextLevel.min - wpk).toFixed(2)} W/kg</strong> to
+                    reach the next level: <strong>{nextLevel.name}</strong>.
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </main>
     </div>
