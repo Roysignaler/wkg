@@ -93,7 +93,7 @@ export default function Home() {
 
           <div className="flex justify-end items-center">
             <button onClick={toggleTheme} className="px-4 py-2 rounded">
-              <SunIcon />
+              <SunIcon className="md:w-5 md:h-5" />
             </button>
           </div>
         </div>
