@@ -73,8 +73,8 @@ export default function DataSummaryCard({
             {nextLevel && (
               <p className="mt-3 text-base">
                 You need an additional{" "}
-                <strong>{(nextLevel.min - wpk).toFixed(2)} W/kg</strong> to
-                reach the next level: <strong>{nextLevel.name}</strong>.
+                <strong>{Math.abs(nextLevel.min - wpk).toFixed(2)} W/kg</strong>{" "}
+                to reach the next level: <strong>{nextLevel.name}</strong>.
               </p>
             )}
           </div>

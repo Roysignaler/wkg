@@ -28,15 +28,19 @@ export default function Home() {
 
   const wpk = parseFloat(result.split(": ")[1]) || 0;
   const { currentLevel, nextLevel } = (() => {
-    const selectedLevels = levels[gender as keyof typeof levels] || [];
+    const selectedLevels = (levels[gender as keyof typeof levels] || []).sort(
+      (a, b) => b.min - a.min
+    );
     let current = null;
     let next = null;
 
     for (let i = 0; i < selectedLevels.length; i++) {
       const level = selectedLevels[i];
+
       if (wpk >= level.min && (level.max === undefined || wpk < level.max)) {
         current = level;
-        next = selectedLevels[i + 1] || null;
+        // The next level would be the one with a higher minimum requirement than the current level
+        next = selectedLevels[i - 1] || null;
         break;
       }
     }
