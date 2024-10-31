@@ -123,7 +123,7 @@ export default function Home() {
         </div>
 
         {/* Left side - Cycling Performance Table with fixed height */}
-        <div className="order-2 md:order-2 lg:order-1 p-0 py-4 flex justify-center items-start h-[525px] overflow-y-auto">
+        <div className="order-2 md:order-2 lg:order-1 p-0 py-4 flex justify-center items-start lg:h-[525px] overflow-y-auto">
           <CyclingPerformanceTable
             isWarmTheme={isWarmTheme}
             result={wpk}
