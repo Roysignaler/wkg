@@ -111,20 +111,15 @@ export default function WattToKgCalculator({
       />
 
       {/* Result displayed here on mobile */}
-      {isMobile && result && (
+      {result && (
         <>
-          <p className="mt-4 text-sm text-gray-700">{result}</p>
-          <button
-            onClick={() => {
-              const summarySection = document.getElementById("summary");
-              if (summarySection) {
-                summarySection.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-            className="mt-4 px-4 py-2 rounded bg-blue-500 text-white"
+          <p
+            className={`${
+              isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+            } text-lg font-semibold`}
           >
-            Explore Results
-          </button>
+            {result}
+          </p>
         </>
       )}
     </div>

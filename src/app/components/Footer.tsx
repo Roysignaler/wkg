@@ -13,20 +13,21 @@ export default function Footer({ isWarmTheme, toggleTheme }: FooterProps) {
       } text-white`}
     >
       <div className="max-w-screen-xl mx-auto border-b-[10px] border-white"></div>
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4 max-w-screen-xl mx-auto py-4 text-lg">
+
+      <div className="grid grid-cols-3 gap-4 max-w-screen-xl mx-auto py-4 text-lg">
         <div className="flex md:justify-start items-start">
           <div>
             <h2 className="text-lg font-semibold">WattKG</h2>
             <p>© 2024</p>
           </div>
         </div>
-        <div className="flex md:justify-start items-start">
+        <div className="flex lg:justify-center items-start">
           <div>
             <h2 className="text-lg font-semibold">About</h2>
             <p>Design and code by Stefan Frederiksen</p>
           </div>
         </div>
-        <div className="flex md:justify-start items-start">
+        <div className="flex lg:justify-end items-start">
           <div>
             <h2 className="text-lg font-semibold">Feedback</h2>
             <p>

@@ -19,7 +19,7 @@ export const levels = {
       min: 5.8,
       name: "World Class",
       description:
-        "Elite cyclists competing at the highest levels, capable of racing in world-class events. Extreme endurance and power, with finely tuned training and nutrition.",
+        "Elite cyclists competing at world-class events. Extreme endurance and power, with finely tuned training and nutrition. ",
       typicalWeek: {
         ridesPerWeek: "5+",
         weeklyDistance: "300 km+",
@@ -123,7 +123,7 @@ export const levels = {
       max: 1.7,
       name: "Novice 1",
       description:
-        "New cyclists getting into the sport, building fitness through short, easy rides.",
+        "New cyclists building fitness with short, easy rides on weekends or for commuting. One ride at a time.",
       typicalWeek: {
         ridesPerWeek: "1",
         weeklyDistance: "30 km",
@@ -137,7 +137,7 @@ export const levels = {
       min: 5.1,
       name: "World Class",
       description:
-        "Elite cyclists with high power output, competing in top-level events. They maintain peak endurance and fitness year-round.",
+        "Elite cyclists competing at world-class events. Extreme endurance and power, with finely tuned training and nutrition.",
       typicalWeek: {
         ridesPerWeek: "5+",
         weeklyDistance: "300 km+",
@@ -150,7 +150,7 @@ export const levels = {
       max: 5.1,
       name: "Exceptional",
       description:
-        "Professional cyclists who support team leaders in pro races, maintaining elite fitness and tactical knowledge.",
+        "Professional cyclists who are key support riders in major races, with high endurance and tactical skill.",
       typicalWeek: {
         ridesPerWeek: "5",
         weeklyDistance: "260 km",
@@ -163,7 +163,7 @@ export const levels = {
       max: 4.6,
       name: "Excellent - A Grade / Cat 1",
       description:
-        "Competitive cyclists excelling in races and group rides, known for strong endurance and skill.",
+        "Highly competitive cyclists who often race in top categories, excelling in age-group triathlons and challenging terrain.",
       typicalWeek: {
         ridesPerWeek: "5+",
         weeklyDistance: "250 km+",
@@ -228,7 +228,7 @@ export const levels = {
       max: 2.5,
       name: "Novice 2",
       description:
-        "Leisure cyclists who ride occasionally on weekends or for commuting.",
+        "Leisure cyclists who ride occasionally on weekends or for commuting. Can ride up to 40 km a week, maybe even more.",
       typicalWeek: {
         ridesPerWeek: "1",
         weeklyDistance: "40 km",
@@ -241,7 +241,7 @@ export const levels = {
       max: 1.9,
       name: "Novice 1",
       description:
-        "New cyclists building fitness with short, easy rides on weekends or for commuting.",
+        "New cyclists building fitness with short, easy rides on weekends or for commuting. One ride at a time.",
       typicalWeek: {
         ridesPerWeek: "1",
         weeklyDistance: "20 km",

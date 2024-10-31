@@ -55,9 +55,8 @@ export default function DataSummaryCard({
           <p>
             <strong>Formula:</strong>{" "}
             <span className="text-lg">
-              {watts} W / {kg} kg =
-            </span>{" "}
-            {result}
+              {watts} W / {kg} kg = {result}
+            </span>
           </p>
         </div>
 
