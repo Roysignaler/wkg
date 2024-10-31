@@ -93,6 +93,8 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* Center - Use the WattToKgCalculator component */}
       <main className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 w-full max-w-screen-xl mx-auto py-4">
         <div className="order-1 md:order-1 lg:order-2 p-0 py-4 flex justify-center items-center">
           <WattToKgCalculator
@@ -108,7 +110,8 @@ export default function Home() {
           />
         </div>
 
-        <div className="order-2 md:order-2 lg:order-1 p-0 py-4 flex justify-center items-start lg:h-[525px] overflow-y-auto">
+        {/* Left side - Use the watt-per-kilo-table component */}
+        <div className="order-2 md:order-2 lg:order-1 p-0 py-4 px-0 flex lg:justify-start justify-center items-start lg:h-[525px] overflow-y-auto">
           <CyclingPerformanceTable
             isWarmTheme={isWarmTheme}
             result={wpk}
@@ -118,7 +121,7 @@ export default function Home() {
 
         {/* Right side - Use the DataSummaryCard component */}
         <div
-          className={`order-3 md:order-3 lg:order-3 p-0 py-4 flex items-start justify-center text-xl ${
+          className={`order-3 md:order-3 lg:order-3 p-0 py-4 flex items-start lg:justify-start justify-center text-xl ${
             isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
           } lg:h-[525px] overflow-y-auto`}
         >

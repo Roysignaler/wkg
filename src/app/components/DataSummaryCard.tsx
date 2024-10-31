@@ -41,7 +41,7 @@ export default function DataSummaryCard({
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="space-y-1 border-b-[5px] pb-3">
+        <div className="space-y-1 border-b-[5px] pb-5">
           <p>
             <strong>Gender:</strong>{" "}
             {gender.charAt(0).toUpperCase() + gender.slice(1)}
@@ -63,7 +63,7 @@ export default function DataSummaryCard({
 
         {currentLevel && (
           <div>
-            <div className="pt-3">
+            <div className="pt-1">
               <CardTitle>
                 <strong>Level: {currentLevel.name}</strong>
               </CardTitle>
