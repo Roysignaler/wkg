@@ -30,12 +30,15 @@ export default function Home() {
   }, [watts, kg]);
 
   const wpk = parseFloat(result.split(": ")[1]) || 0;
-  const { currentLevel, nextLevel } = (() => {
+  const kgValue = parseFloat(kg) || 1; // Ensure we handle kg being zero
+
+  const { currentLevel, nextLevel, wattGainN } = (() => {
     const selectedLevels = (levels[gender as keyof typeof levels] || []).sort(
       (a, b) => b.min - a.min
     );
     let current = null;
     let next = null;
+    let wattGainNeeded = null;
 
     for (let i = 0; i < selectedLevels.length; i++) {
       const level = selectedLevels[i];
@@ -43,10 +46,17 @@ export default function Home() {
       if (wpk >= level.min && (level.max === undefined || wpk < level.max)) {
         current = level;
         next = selectedLevels[i - 1] || null;
+        if (next) {
+          wattGainNeeded = Math.abs(next.min - wpk) * kgValue;
+        }
         break;
       }
     }
-    return { currentLevel: current, nextLevel: next };
+    return {
+      currentLevel: current,
+      nextLevel: next,
+      wattGainN: wattGainNeeded,
+    };
   })();
 
   return (
@@ -56,7 +66,7 @@ export default function Home() {
         <Header isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
 
         {/* Main Content Area */}
-        <main className="flex-grow overflow-y-auto w-full max-w-screen-xl mx-auto py-4 ">
+        <main className=" overflow-y-auto w-full max-w-screen-xl mx-auto py-4 ">
           {/* WattToKgCalculator component */}
           <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 pb-0">
             <div className="order-1 md:order-1 lg:order-2 p-0 py-4 flex justify-center items-center">
@@ -96,6 +106,7 @@ export default function Home() {
                 result={result}
                 currentLevel={currentLevel}
                 nextLevel={nextLevel}
+                wattGainN={wattGainN}
                 wpk={wpk}
               />
             </div>
