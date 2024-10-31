@@ -56,7 +56,7 @@ export default function Home() {
         <Header isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
 
         {/* Main Content Area */}
-        <main className="flex-grow overflow-y-auto w-full max-w-screen-xl mx-auto py-4 ">
+        <main className=" overflow-y-auto w-full max-w-screen-xl mx-auto py-4 ">
           {/* WattToKgCalculator component */}
           <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 pb-0">
             <div className="order-1 md:order-1 lg:order-2 p-0 py-4 flex justify-center items-center">

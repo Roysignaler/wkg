@@ -41,7 +41,11 @@ export default function DataSummaryCard({
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="space-y-1 border-b-[5px] pb-5">
+        <div
+          className={`space-y-1 border-b-[5px] pb-5 ${
+            isWarmTheme ? "border-[#F94807]" : "border-color-bright-100"
+          }`}
+        >
           <p>
             <strong>Gender:</strong>{" "}
             {gender.charAt(0).toUpperCase() + gender.slice(1)}
