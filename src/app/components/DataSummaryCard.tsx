@@ -18,6 +18,7 @@ interface DataSummaryCardProps {
   currentLevel: any; // Adjust the type based on your data structure
   nextLevel: any;
   wpk: number;
+  wattGainN: any;
 }
 
 export default function DataSummaryCard({
@@ -29,6 +30,7 @@ export default function DataSummaryCard({
   currentLevel,
   nextLevel,
   wpk,
+  wattGainN,
 }: DataSummaryCardProps) {
   return (
     <Card className="w-full h-full md:max-w-[400px] md:mx-auto">
@@ -63,8 +65,7 @@ export default function DataSummaryCard({
             </span>
           </p>
         </div>
-
-        {currentLevel && (
+        {(currentLevel && (
           <div>
             <div className="pt-1">
               <CardTitle>
@@ -81,13 +82,20 @@ export default function DataSummaryCard({
               </p>
             )}
           </div>
+        )) || (
+          <div>
+            <div className="pt-1">
+              <CardTitle>
+                <strong>Level: Time to start</strong>
+              </CardTitle>
+              <p className="text-base">
+                Every cyclist begins somewhere! Keep pushing forward, and you’ll
+                reach the first level soon.
+              </p>
+            </div>
+          </div>
         )}
       </CardContent>
-      <CardFooter>
-        <p className="text-center text-xs">
-          Tailored insights to help you achieve your next milestone.
-        </p>
-      </CardFooter>
     </Card>
   );
 }
