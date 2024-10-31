@@ -123,7 +123,7 @@ export default function Home() {
         </div>
 
         {/* Left side - Cycling Performance Table with fixed height */}
-        <div className="order-2 md:order-2 lg:order-1 p-0 py-4 flex justify-center items-start h-[600px] overflow-y-auto">
+        <div className="order-2 md:order-2 lg:order-1 p-0 py-4 flex justify-center items-start h-[525px] overflow-y-auto">
           <CyclingPerformanceTable
             isWarmTheme={isWarmTheme}
             result={wpk}
@@ -132,12 +132,13 @@ export default function Home() {
         </div>
 
         {/* Right side - Summary in Card with fixed height */}
+        {/* Right side - Summary in Card with fixed height */}
         <div
-          className={`order-3 md:order-3 lg:order-3 p-0 py-4 flex items-start text-xl ${
+          className={`order-3 md:order-3 lg:order-3 p-0 py-4 flex items-start justify-center text-xl ${
             isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
-          } h-[600px] overflow-y-auto`}
+          } h-[525px] overflow-y-auto`}
         >
-          <Card className="w-full h-full">
+          <Card className="w-full h-full md:max-w-[400px] md:mx-auto">
             <CardHeader className="space-y-1 pb-3">
               <CardTitle className="space-y-1">
                 <strong>Data Summary</strong>
@@ -147,7 +148,7 @@ export default function Home() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-1 border-b-[5px] border[-color-bright-100] pb-3">
+              <div className="space-y-1 border-b-[5px] pb-3">
                 <p>
                   <strong>Gender:</strong>{" "}
                   {gender.charAt(0).toUpperCase() + gender.slice(1)}
@@ -159,35 +160,19 @@ export default function Home() {
                   <strong>Weight:</strong> {kg} kg
                 </p>
                 <p>
-                  <strong>Formula:</strong> {watts} W / {kg} kg = {result}
+                  <strong>Formula:</strong>{" "}
+                  <span className="text-lg">
+                    {watts} W / {kg} kg ={" "}
+                  </span>
+                  {result}
                 </p>
               </div>
 
               {currentLevel && (
                 <div>
-                  <div className="space-y-0 border-b-[5px] border[-color-bright-100] pb-3">
-                    <div>
-                      <p>
-                        <strong>Rides per week:</strong>{" "}
-                        {currentLevel.typicalWeek.ridesPerWeek}
-                      </p>
-                      <p>
-                        <strong>Weekly distance:</strong>{" "}
-                        {currentLevel.typicalWeek.weeklyDistance}
-                      </p>
-                      <p>
-                        <strong>One-day endurance:</strong>{" "}
-                        {currentLevel.typicalWeek.oneDayEndurance}
-                      </p>
-                      <p>
-                        <strong>Average speed:</strong>{" "}
-                        {currentLevel.typicalWeek.avgSpeed}
-                      </p>
-                    </div>
-                  </div>
                   <div className="pt-3">
                     <CardTitle>
-                      <strong>Fitness Level: {currentLevel.name}</strong>
+                      <strong>Level: {currentLevel.name}</strong>
                     </CardTitle>
                     <p className="text-base">{currentLevel.description}</p>
                   </div>

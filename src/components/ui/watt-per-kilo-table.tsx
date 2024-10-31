@@ -50,22 +50,24 @@ const CyclingPerformanceTable = ({
   };
 
   return (
-    <div className="flex justify-center ">
-      <table className="min-w-full border border-gray-200 shadow-lg">
+    <div className="flex justify-center">
+      <table className="min-w-full rounded-xl border border-gray-200 shadow-lg">
         <thead>
           <tr
             className={`w-full p-4 ${
               isWarmTheme ? "bg-[#F94807]" : "bg-color-bright-100"
             } text-white`}
           >
-            <th className="px-6 py-3 text-center text-white font-semibold">
+            <th className="p-3 py-3 text-left text-white font-semibold">
               Level
             </th>
-            <th className="px-6 py-3 text-center text-white font-semibold">
-              W/kg Males
+            <th className="w-1/4 px-1 py-1 text-center text-white font-semibold">
+              W/kg <br />
+              Males
             </th>
-            <th className="px-6 py-3 text-center text-white font-semibold">
-              W/kg Females
+            <th className="w-1/4 px-1 py-1 text-center text-white font-semibold">
+              W/kg <br />
+              Female
             </th>
           </tr>
         </thead>
@@ -78,7 +80,7 @@ const CyclingPerformanceTable = ({
             return (
               <tr
                 key={index}
-                className={`${
+                className={`w-1/2 ${
                   isHighlighted
                     ? `${
                         isWarmTheme
@@ -91,7 +93,7 @@ const CyclingPerformanceTable = ({
                 }`}
               >
                 <td
-                  className={`px-4 py-1 text-center ${
+                  className={`px-2 py-1 text-left ${
                     isHighlighted
                       ? "text-white"
                       : isWarmTheme
@@ -102,7 +104,7 @@ const CyclingPerformanceTable = ({
                   {row.level}
                 </td>
                 <td
-                  className={`px-4 py-1 text-center ${
+                  className={`w-1/6 px-1 py-1 text-center ${
                     isHighlighted
                       ? "text-white"
                       : isWarmTheme
@@ -113,7 +115,7 @@ const CyclingPerformanceTable = ({
                   {row.maleWkg}
                 </td>
                 <td
-                  className={`px-4 py-1 text-center ${
+                  className={`w-1/6 px-1 py-1 text-center ${
                     isHighlighted
                       ? "text-white"
                       : isWarmTheme
