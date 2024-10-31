@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { levels } from "@/components/data/levelsData";
 import InfoSection from "./components/InformationCards";
+import RootLayout from "@/app/layout";
 
 export default function Home() {
   const [isWarmTheme, setIsWarmTheme] = useState(false);
@@ -49,68 +50,70 @@ export default function Home() {
   })();
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Fixed Header */}
-      <Header isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
+    <RootLayout isWarmTheme={isWarmTheme}>
+      <div className="flex flex-col min-h-screen">
+        {/* Fixed Header */}
+        <Header isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
 
-      {/* Main Content Area */}
-      <main className="flex-grow overflow-y-auto w-full max-w-screen-xl mx-auto py-4 ">
-        {/* WattToKgCalculator component */}
-        <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 pb-0">
-          <div className="order-1 md:order-1 lg:order-2 p-0 py-4 flex justify-center items-center">
-            <WattToKgCalculator
-              isWarmTheme={isWarmTheme}
-              result={result}
-              setResult={setResult}
-              watts={watts}
-              setWatts={setWatts}
-              kg={kg}
-              setKg={setKg}
-              gender={gender}
-              setGender={setGender}
-            />
-          </div>
+        {/* Main Content Area */}
+        <main className="flex-grow overflow-y-auto w-full max-w-screen-xl mx-auto py-4 ">
+          {/* WattToKgCalculator component */}
+          <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 pb-0">
+            <div className="order-1 md:order-1 lg:order-2 p-0 py-4 flex justify-center items-center">
+              <WattToKgCalculator
+                isWarmTheme={isWarmTheme}
+                result={result}
+                setResult={setResult}
+                watts={watts}
+                setWatts={setWatts}
+                kg={kg}
+                setKg={setKg}
+                gender={gender}
+                setGender={setGender}
+              />
+            </div>
 
-          {/* Left side - CyclingPerformanceTable component */}
-          <div className="order-2 md:order-2 lg:order-1 p-0 py-4 px-0 flex lg:justify-start justify-center items-start overflow-y-auto">
-            <CyclingPerformanceTable
-              isWarmTheme={isWarmTheme}
-              result={wpk}
-              gender={gender}
-            />
-          </div>
+            {/* Left side - CyclingPerformanceTable component */}
+            <div className="order-2 md:order-2 lg:order-1 p-0 py-4 px-0 flex lg:justify-start justify-center items-start overflow-y-auto">
+              <CyclingPerformanceTable
+                isWarmTheme={isWarmTheme}
+                result={wpk}
+                gender={gender}
+              />
+            </div>
 
-          {/* Right side - DataSummaryCard component */}
-          <div
-            className={`order-3 md:order-3 lg:order-3 p-0 py-4 flex items-start lg:justify-start justify-center text-xl ${
+            {/* Right side - DataSummaryCard component */}
+            <div
+              className={`order-3 md:order-3 lg:order-3 p-0 py-4 flex items-start lg:justify-start justify-center text-xl ${
+                isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+              } overflow-y-auto`}
+            >
+              <DataSummaryCard
+                isWarmTheme={isWarmTheme}
+                gender={gender}
+                watts={watts}
+                kg={kg}
+                result={result}
+                currentLevel={currentLevel}
+                nextLevel={nextLevel}
+                wpk={wpk}
+              />
+            </div>
+          </section>
+
+          {/* InfoSection component */}
+          <section
+            className={`grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 py-4 pt-0 ${
               isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
-            } overflow-y-auto`}
+            }`}
           >
-            <DataSummaryCard
-              isWarmTheme={isWarmTheme}
-              gender={gender}
-              watts={watts}
-              kg={kg}
-              result={result}
-              currentLevel={currentLevel}
-              nextLevel={nextLevel}
-              wpk={wpk}
-            />
-          </div>
-        </section>
+            <InfoSection isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
+          </section>
+        </main>
 
-        {/* InfoSection component */}
-        <section
-          className={`grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 py-4 pt-0 ${
-            isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
-          }`}
-        >
-          <InfoSection isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
-        </section>
-      </main>
-
-      {/* Sticky Footer */}
-      <Footer isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
-    </div>
+        {/* Sticky Footer */}
+        <Footer isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
+      </div>
+    </RootLayout>
   );
 }
