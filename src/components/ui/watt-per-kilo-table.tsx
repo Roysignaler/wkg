@@ -53,14 +53,18 @@ const CyclingPerformanceTable = ({
     <div className="flex justify-center ">
       <table className="min-w-full border border-gray-200 shadow-lg">
         <thead>
-          <tr className={`${isWarmTheme ? "bg-[#FFD8C2]" : "bg-[#C2E3FF]"}`}>
-            <th className="px-6 py-3 text-center text-gray-600 font-semibold">
+          <tr
+            className={`w-full p-4 ${
+              isWarmTheme ? "bg-[#F94807]" : "bg-color-bright-100"
+            } text-white`}
+          >
+            <th className="px-6 py-3 text-center text-white font-semibold">
               Level
             </th>
-            <th className="px-6 py-3 text-center text-gray-600 font-semibold">
+            <th className="px-6 py-3 text-center text-white font-semibold">
               W/kg Males
             </th>
-            <th className="px-6 py-3 text-center text-gray-600 font-semibold">
+            <th className="px-6 py-3 text-center text-white font-semibold">
               W/kg Females
             </th>
           </tr>
@@ -77,16 +81,48 @@ const CyclingPerformanceTable = ({
                 className={`${
                   isHighlighted
                     ? `${
-                        isWarmTheme ? "bg-[#F1A07A]" : "bg-[#A4C7E1]"
+                        isWarmTheme
+                          ? "bg-[#F94807] text-white"
+                          : "bg-color-bright-100 text-white"
                       } font-bold`
                     : index % 2 === 0
                     ? "bg-white"
                     : "bg-gray-50"
                 }`}
               >
-                <td className="px-4 py-1 text-center">{row.level}</td>
-                <td className="px-4 py-1 text-center">{row.maleWkg}</td>
-                <td className="px-4 py-1 text-center">{row.femaleWkg}</td>
+                <td
+                  className={`px-4 py-1 text-center ${
+                    isHighlighted
+                      ? "text-white"
+                      : isWarmTheme
+                      ? "text-[#F94807]"
+                      : "text-[#0A1833]"
+                  }`}
+                >
+                  {row.level}
+                </td>
+                <td
+                  className={`px-4 py-1 text-center ${
+                    isHighlighted
+                      ? "text-white"
+                      : isWarmTheme
+                      ? "text-[#F94807]"
+                      : "text-[#0A1833]"
+                  }`}
+                >
+                  {row.maleWkg}
+                </td>
+                <td
+                  className={`px-4 py-1 text-center ${
+                    isHighlighted
+                      ? "text-white"
+                      : isWarmTheme
+                      ? "text-[#F94807]"
+                      : "text-[#0A1833]"
+                  }`}
+                >
+                  {row.femaleWkg}
+                </td>
               </tr>
             );
           })}
