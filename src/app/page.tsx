@@ -6,6 +6,7 @@ import WattToKgCalculator from "./components/WattToKgCalculator";
 import CyclingPerformanceTable from "@/components/ui/watt-per-kilo-table";
 import DataSummaryCard from "./components/DataSummaryCard";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { levels } from "@/components/data/levelsData";
 
 export default function Home() {
@@ -52,7 +53,7 @@ export default function Home() {
       <Header isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
 
       {/* Center - Use the WattToKgCalculator component */}
-      <main className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 w-full max-w-screen-xl mx-auto py-4">
+      <main className="flex-grow grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 w-full max-w-screen-xl mx-auto py-4">
         <div className="order-1 md:order-1 lg:order-2 p-0 py-4 flex justify-center items-center">
           <WattToKgCalculator
             isWarmTheme={isWarmTheme}
@@ -94,6 +95,8 @@ export default function Home() {
           />
         </div>
       </main>
+
+      <Footer isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
     </div>
   );
 }
