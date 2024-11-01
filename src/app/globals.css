@@ -74,10 +74,10 @@ body {
     transform: translateY(-0%);
   }
   to {
-    transform: translateY(120%);
+    transform: translateY(140%);
   }
 }
 
 .animate-revealDown {
-  animation: revealDown 3s ease-in-out forwards;
+  animation: revealDown 3.5s ease-in-out forwards;
 }
