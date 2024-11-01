@@ -8,18 +8,28 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+interface Level {
+  name: string;
+  description: string;
+  min: number;
+  max?: number;
+  typicalWeek?: {
+    ridesPerWeek: number;
+    weeklyDistance: string;
+    oneDayEndurance: string;
+    avgSpeed: string;
+  };
+}
 interface DataSummaryCardProps {
   isWarmTheme: boolean;
   gender: string;
   watts: string;
   kg: string;
   result: string;
-  currentLevel: any; // Adjust the type based on your data structure
-  nextLevel: any;
+  currentLevel: Level | null;
+  nextLevel: Level | null;
   wpk: number;
-  wattGainN: any;
 }
-
 export default function DataSummaryCard({
   isWarmTheme,
   gender,
