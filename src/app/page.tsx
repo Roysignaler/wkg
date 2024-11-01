@@ -12,7 +12,6 @@ import InfoSection from "./components/InformationCards";
 import RootLayout from "@/app/layout";
 
 export default function Home() {
-  const [isWarmTheme, setIsWarmTheme] = useState(false);
   const [result, setResult] = useState("");
   const [watts, setWatts] = useState("160");
   const [kg, setKg] = useState("90");
@@ -80,11 +79,7 @@ export default function Home() {
             </div>
 
             {/* Right side - DataSummaryCard component */}
-            <div
-              className={`order-3 md:order-3 lg:order-3 p-0 py-4 flex items-start lg:justify-start justify-center text-xl ${
-                isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
-              } overflow-y-auto`}
-            >
+            <div className="order-3 md:order-3 lg:order-3 p-0 py-4 flex items-start lg:justify-start justify-center text-xl  overflow-y-auto">
               <DataSummaryCard
                 gender={gender}
                 watts={watts}
@@ -98,11 +93,7 @@ export default function Home() {
           </section>
 
           {/* InfoSection component */}
-          <section
-            className={`grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 py-4 pt-0 ${
-              isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
-            }`}
-          >
+          <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 py-4 pt-0">
             <InfoSection />
           </section>
         </main>
