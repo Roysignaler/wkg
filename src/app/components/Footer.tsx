@@ -1,11 +1,9 @@
 // components/Footer.tsx
+import { useTheme } from "./ThemeContext";
 
-interface FooterProps {
-  isWarmTheme: boolean;
-  toggleTheme: () => void;
-}
+export default function Footer() {
+  const { isWarmTheme } = useTheme(); // Use ThemeContext to access isWarmTheme
 
-export default function Footer({ isWarmTheme }: FooterProps) {
   return (
     <footer
       className={`w-full p-4 ${

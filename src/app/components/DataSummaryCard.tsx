@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useTheme } from "./ThemeContext"; // Import useTheme to access isWarmTheme
 
 interface Level {
   name: string;
@@ -20,8 +21,8 @@ interface Level {
     avgSpeed: string;
   };
 }
+
 interface DataSummaryCardProps {
-  isWarmTheme: boolean;
   gender: string;
   watts: string;
   kg: string;
@@ -30,8 +31,8 @@ interface DataSummaryCardProps {
   nextLevel: Level | null;
   wpk: number;
 }
+
 export default function DataSummaryCard({
-  isWarmTheme,
   gender,
   watts,
   kg,
@@ -40,10 +41,20 @@ export default function DataSummaryCard({
   nextLevel,
   wpk,
 }: DataSummaryCardProps) {
+  const { isWarmTheme } = useTheme(); // Access isWarmTheme from ThemeContext
+
   return (
-    <Card className="w-full h-full md:max-w-[400px] md:mx-auto">
+    <Card
+      className={`w-full h-full md:max-w-[400px] md:mx-auto ${
+        isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+      }`}
+    >
       <CardHeader className="space-y-1 pb-3">
-        <CardTitle className="space-y-1">
+        <CardTitle
+          className={`space-y-1 ${
+            isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+          }`}
+        >
           <strong>Data Summary</strong>
         </CardTitle>
         <CardDescription>
@@ -76,7 +87,9 @@ export default function DataSummaryCard({
         {(currentLevel && (
           <div>
             <div className="pt-1">
-              <CardTitle>
+              <CardTitle
+                className={isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"}
+              >
                 <strong>Level: {currentLevel.name}</strong>
               </CardTitle>
               <p className="text-base">{currentLevel.description}</p>
@@ -93,7 +106,9 @@ export default function DataSummaryCard({
         )) || (
           <div>
             <div className="pt-1">
-              <CardTitle>
+              <CardTitle
+                className={isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"}
+              >
                 <strong>Level: Time to start</strong>
               </CardTitle>
               <p className="text-base">

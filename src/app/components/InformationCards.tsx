@@ -1,15 +1,11 @@
 // components/InformationCards.tsx
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronDown } from "lucide-react";
+import { useTheme } from "./ThemeContext"; // Import useTheme from ThemeContext
 
-interface InfoSectionProps {
-  isWarmTheme: boolean;
-  toggleTheme: () => void;
-}
-
-export default function InfoSection({}: InfoSectionProps) {
+export default function InfoSection() {
+  const { isWarmTheme } = useTheme(); // Use ThemeContext to access isWarmTheme
   const [isVisible, setIsVisible] = useState({
     whatIsWkg: false,
     whyIsWkgUseful: false,
@@ -41,17 +37,27 @@ export default function InfoSection({}: InfoSectionProps) {
             onClick={() => toggleVisibility("whatIsWkg")}
             className="flex items-center cursor-pointer"
           >
-            <strong>What is W/KG? </strong>
+            <strong
+              className={` ${
+                isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+              }`}
+            >
+              What is W/KG?{" "}
+            </strong>
             <ChevronDown
               className={`ml-2 transform ${
                 isVisible.whatIsWkg ? "rotate-180" : ""
-              }`}
+              } ${isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"}`}
             />
           </CardTitle>
         </CardHeader>
         {isVisible.whatIsWkg && (
           <CardContent className="lg:pl-0 lg:pr-8">
-            <p className="text-justify">
+            <p
+              className={`text-justify ${
+                isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+              }`}
+            >
               W/kg, or watts per kilogram, is a measure of the power output (in
               watts) relative to a cyclist&apos;s body weight. It is a critical
               metric in cycling and other endurance sports as it combines
@@ -69,17 +75,27 @@ export default function InfoSection({}: InfoSectionProps) {
             onClick={() => toggleVisibility("whyIsWkgUseful")}
             className="flex items-center cursor-pointer"
           >
-            <strong>Why is W/KG Useful? </strong>
+            <strong
+              className={` ${
+                isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+              }`}
+            >
+              Why is W/KG Useful?{" "}
+            </strong>
             <ChevronDown
               className={`ml-2 transform ${
                 isVisible.whyIsWkgUseful ? "rotate-180" : ""
-              }`}
+              } ${isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"}`}
             />
           </CardTitle>
         </CardHeader>
         {isVisible.whyIsWkgUseful && (
           <CardContent>
-            <p className="text-justify">
+            <p
+              className={`text-justify ${
+                isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+              }`}
+            >
               W/kg helps athletes understand their power-to-weight ratio, a
               fundamental indicator of performance in cycling. It allows for
               fair comparison between riders of different sizes, identifying
@@ -98,24 +114,34 @@ export default function InfoSection({}: InfoSectionProps) {
             onClick={() => toggleVisibility("howToUseWkg")}
             className="flex items-center cursor-pointer"
           >
-            <strong>How to Use W/KG? </strong>
+            <strong
+              className={` ${
+                isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+              }`}
+            >
+              How to Use W/KG?{" "}
+            </strong>
             <ChevronDown
               className={`ml-2 transform ${
                 isVisible.howToUseWkg ? "rotate-180" : ""
-              }`}
+              } ${isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"}`}
             />
           </CardTitle>
         </CardHeader>
         {isVisible.howToUseWkg && (
           <CardContent className="lg:pl-8">
-            <p className="text-justify">
+            <p
+              className={`text-justify ${
+                isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+              }`}
+            >
               Cyclists can use W/kg to tailor their training, focus on their
               strengths, and address weaknesses. By tracking changes in W/kg
               over time, riders can gauge improvements in fitness and make
-              informed decisions about pacing during races. It’s also valuable
-              for setting realistic goals: increasing power, decreasing weight,
-              or a combination of both to optimize performance on specific
-              courses.
+              informed decisions about pacing during races. It&apos;s also
+              valuable for setting realistic goals: increasing power, decreasing
+              weight, or a combination of both to optimize performance on
+              specific courses.
             </p>
           </CardContent>
         )}

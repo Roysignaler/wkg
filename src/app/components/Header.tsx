@@ -2,13 +2,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDownIcon, SunIcon } from "@radix-ui/react-icons";
+import { useTheme } from "./ThemeContext"; // Import useTheme from ThemeContext
 
-interface HeaderProps {
-  isWarmTheme: boolean;
-  toggleTheme: () => void;
-}
-
-export default function Header({ isWarmTheme, toggleTheme }: HeaderProps) {
+export default function Header() {
+  const { isWarmTheme, toggleTheme } = useTheme(); // Use ThemeContext to get isWarmTheme and toggleTheme
   const [showOverlay, setShowOverlay] = useState(true);
 
   useEffect(() => {

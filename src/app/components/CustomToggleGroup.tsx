@@ -1,19 +1,20 @@
-// CustomToggleGroup.tsx
+// components/CustomToggleGroup.tsx
 
 import React from "react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import { useTheme } from "./ThemeContext"; // Import useTheme to access theme context
 
 interface CustomToggleGroupProps {
   value: "male" | "female";
   onValueChange: (value: "male" | "female") => void;
-  isWarmTheme: boolean;
 }
 
 const CustomToggleGroup = ({
   value,
   onValueChange,
-  isWarmTheme,
 }: CustomToggleGroupProps) => {
+  const { isWarmTheme } = useTheme(); // Access isWarmTheme from ThemeContext
+
   const getButtonClasses = (gender: "male" | "female") => {
     const isSelected = value === gender;
     return `

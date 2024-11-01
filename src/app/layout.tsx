@@ -1,11 +1,11 @@
-// app/layout.tsx
+// src/app/layout.tsx
 "use client";
 
 import { useEffect } from "react";
 import { Audiowide, Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider, useTheme } from "./components/ThemeContext"; // Import ThemeProvider and useTheme
 
-// Google Fonts setup
 const audiowide = Audiowide({
   subsets: ["latin"],
   variable: "--font-audiowide",
@@ -24,13 +24,9 @@ const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-interface RootLayoutProps {
-  children: React.ReactNode;
-  isWarmTheme: boolean; // Ensure this is included in the props interface
-}
+function LayoutWithFavicon({ children }: { children: React.ReactNode }) {
+  const { isWarmTheme } = useTheme();
 
-export default function RootLayout({ children, isWarmTheme }: RootLayoutProps) {
-  // Add useEffect to update favicon based on `isWarmTheme`
   useEffect(() => {
     const favicon = document.querySelector('link[rel="icon"]');
     if (favicon) {
@@ -44,7 +40,6 @@ export default function RootLayout({ children, isWarmTheme }: RootLayoutProps) {
   return (
     <html lang="en">
       <head>
-        {/* Preconnect for Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -53,16 +48,27 @@ export default function RootLayout({ children, isWarmTheme }: RootLayoutProps) {
         />
         <link
           rel="icon"
-          href={isWarmTheme ? "/watticonorange.svg" : "/watticonblue.svg"} // Set initial favicon
+          href={isWarmTheme ? "/watticonorange.svg" : "/watticonblue.svg"}
           sizes="any"
         />
       </head>
-
       <body
         className={`${audiowide.variable} ${inter.variable} ${poppins.variable} antialiased`}
       >
         {children}
       </body>
     </html>
+  );
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <ThemeProvider>
+      <LayoutWithFavicon>{children}</LayoutWithFavicon>
+    </ThemeProvider>
   );
 }

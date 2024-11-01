@@ -54,10 +54,10 @@ export default function Home() {
   })();
 
   return (
-    <RootLayout isWarmTheme={isWarmTheme}>
+    <RootLayout>
       <div className="flex flex-col min-h-screen">
         {/* Fixed Header */}
-        <Header isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
+        <Header />
 
         {/* Main Content Area */}
         <main className=" overflow-y-auto w-full max-w-screen-xl mx-auto py-4 ">
@@ -65,7 +65,6 @@ export default function Home() {
           <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 pb-0">
             <div className="order-1 md:order-1 lg:order-2 p-0 py-4 flex justify-center items-center">
               <WattToKgCalculator
-                isWarmTheme={isWarmTheme}
                 result={result}
                 setResult={setResult}
                 watts={watts}
@@ -93,7 +92,6 @@ export default function Home() {
               } overflow-y-auto`}
             >
               <DataSummaryCard
-                isWarmTheme={isWarmTheme}
                 gender={gender}
                 watts={watts}
                 kg={kg}
@@ -111,12 +109,12 @@ export default function Home() {
               isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
             }`}
           >
-            <InfoSection isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
+            <InfoSection />
           </section>
         </main>
 
         {/* Sticky Footer */}
-        <Footer isWarmTheme={isWarmTheme} toggleTheme={toggleTheme} />
+        <Footer />
       </div>
     </RootLayout>
   );
