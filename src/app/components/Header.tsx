@@ -1,7 +1,6 @@
 // components/Header.tsx
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowDownIcon, SunIcon } from "@radix-ui/react-icons";
+import { SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "./ThemeContext"; // Import useTheme from ThemeContext
 
 export default function Header() {
@@ -29,45 +28,49 @@ export default function Header() {
           isWarmTheme ? "bg-[#F94807]" : "bg-color-bright-100"
         } text-white`}
       >
-        <div className="max-w-screen-xl mx-auto border-b-[10px] border-white">
-          <p className="pb-4 text-base">
-            <strong>Beta</strong> -{" "}
-            <a href="https://forms.gle/aDMDVmzJjn95rDT97">
-              <u>Give feedback</u>
-            </a>{" "}
-            or{" "}
-            <a href="https://twitter.com/intent/tweet?text=wkg.app%20from%20@roysignaler%20%20%0A%0A">
-              <u>tweet it</u>
-            </a>
-            .
-          </p>
+        {/* Wrapper for flex content and border */}
+        <div className="max-w-screen-xl mx-auto">
+          {/* Flex Container for Header Content */}
+          <div className="relative flex items-center justify-between">
+            {/* Left: Beta Section */}
+            <div className="lg:text-lg text-base">
+              <p>
+                <strong>Beta</strong> -{" "}
+                <a href="https://forms.gle/aDMDVmzJjn95rDT97">
+                  <u>Give feedback</u>
+                </a>{" "}
+                or{" "}
+                <a href="https://twitter.com/intent/tweet?text=wkg.app%20from%20@roysignaler%20%20%0A%0A">
+                  <u>tweet it</u>
+                </a>
+                .
+              </p>
+            </div>
+
+            {/* Centered Text: Essential Tool for Cyclists */}
+            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 text-center lg:text-lg text-base">
+              <p>
+                <strong>Essential tool for cyclists</strong>
+              </p>
+            </div>
+
+            {/* Right: Theme Toggle Button */}
+            <div>
+              <button onClick={toggleTheme} className="px-0 py-2 rounded">
+                <SunIcon className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Border under Top Section, aligned with flex content */}
+          <div className="border-b-[10px] border-white mt-1"></div>
         </div>
-        <div className="grid grid-cols-3 gap-4 max-w-screen-xl mx-auto py-4 text-lg">
-          <div className="flex justify-start items-start">
-            <Button
-              variant="ghost"
-              onClick={() => {
-                const mainContent = document.getElementById("main-content");
-                if (mainContent) {
-                  mainContent.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="px-0 py-2"
-            >
-              <strong className="md:text-lg">Explore wkg.app</strong>{" "}
-              <ArrowDownIcon />
-            </Button>
-          </div>
-          <div className="flex justify-center items-center text-center md:text-lg text-base">
-            <p>
-              <strong>Essential tool for cyclists</strong>
-            </p>
-          </div>
-          <div className="flex justify-end items-center">
-            <button onClick={toggleTheme} className="px-0 py-2 rounded">
-              <SunIcon className="w-5 h-5" />
-            </button>
-          </div>
+
+        {/* Essential Tool Text for Mobile */}
+        <div className="flex lg:hidden justify-start items-center text-left text-lg mt-2">
+          <p>
+            <strong>Essential tool for cyclists</strong>
+          </p>
         </div>
       </header>
     </>
