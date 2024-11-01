@@ -48,7 +48,7 @@ export default function WattToKgCalculator({
           isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
         } text-lg font-semibold`}
       >
-        Watt to KG Calculator
+        Watts Per Kilogram <br /> W/kg Calculator
       </h2>
 
       {/* Watts Input */}
@@ -110,7 +110,7 @@ export default function WattToKgCalculator({
         isWarmTheme={isWarmTheme}
       />
 
-      {/* Result displayed here on mobile */}
+      {/* Result HERE cause a spike in the load. Make a shadow or a solution for this */}
       {result && (
         <>
           <p

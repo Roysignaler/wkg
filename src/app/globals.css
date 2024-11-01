@@ -68,3 +68,16 @@ body {
   height: 16px;
   border-radius: 50%;
 }
+
+@keyframes revealDown {
+  from {
+    transform: translateY(-0%);
+  }
+  to {
+    transform: translateY(110%);
+  }
+}
+
+.animate-revealDown {
+  animation: revealDown 3s ease-in-out forwards;
+}
