@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -30,7 +29,6 @@ export default function DataSummaryCard({
   currentLevel,
   nextLevel,
   wpk,
-  wattGainN,
 }: DataSummaryCardProps) {
   return (
     <Card className="w-full h-full md:max-w-[400px] md:mx-auto">

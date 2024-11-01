@@ -20,7 +20,6 @@ interface WattToKgCalculatorProps {
 export default function WattToKgCalculator({
   isWarmTheme,
   result,
-  setResult,
   watts,
   setWatts,
   kg,
@@ -28,16 +27,6 @@ export default function WattToKgCalculator({
   gender,
   setGender,
 }: WattToKgCalculatorProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Check window width to determine if device is mobile
-    const handleResize = () => setIsMobile(window.innerWidth < 1024);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const handleSliderChangeWatts = (value: number) => setWatts(value.toString());
   const handleSliderChangeKg = (value: number) => setKg(value.toString());
 

@@ -5,7 +5,7 @@ interface FooterProps {
   toggleTheme: () => void;
 }
 
-export default function Footer({ isWarmTheme, toggleTheme }: FooterProps) {
+export default function Footer({ isWarmTheme }: FooterProps) {
   return (
     <footer
       className={`w-full p-4 ${
