@@ -14,7 +14,7 @@ interface Level {
   min: number;
   max?: number;
   typicalWeek?: {
-    ridesPerWeek: number;
+    ridesPerWeek: string;
     weeklyDistance: string;
     oneDayEndurance: string;
     avgSpeed: string;

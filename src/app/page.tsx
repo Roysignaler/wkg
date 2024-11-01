@@ -32,13 +32,12 @@ export default function Home() {
   const wpk = parseFloat(result.split(": ")[1]) || 0;
   const kgValue = parseFloat(kg) || 1; // Ensure we handle kg being zero
 
-  const { currentLevel, nextLevel, wattGainN } = (() => {
+  const { currentLevel, nextLevel } = (() => {
     const selectedLevels = (levels[gender as keyof typeof levels] || []).sort(
       (a, b) => b.min - a.min
     );
     let current = null;
     let next = null;
-    let wattGainNeeded = null;
 
     for (let i = 0; i < selectedLevels.length; i++) {
       const level = selectedLevels[i];
@@ -46,16 +45,12 @@ export default function Home() {
       if (wpk >= level.min && (level.max === undefined || wpk < level.max)) {
         current = level;
         next = selectedLevels[i - 1] || null;
-        if (next) {
-          wattGainNeeded = Math.abs(next.min - wpk) * kgValue;
-        }
         break;
       }
     }
     return {
       currentLevel: current,
       nextLevel: next,
-      wattGainN: wattGainNeeded,
     };
   })();
 
@@ -106,7 +101,6 @@ export default function Home() {
                 result={result}
                 currentLevel={currentLevel}
                 nextLevel={nextLevel}
-                wattGainN={wattGainN}
                 wpk={wpk}
               />
             </div>

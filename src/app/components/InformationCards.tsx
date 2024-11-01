@@ -53,7 +53,7 @@ export default function InfoSection({}: InfoSectionProps) {
           <CardContent className="lg:pl-0 lg:pr-8">
             <p className="text-justify">
               W/kg, or watts per kilogram, is a measure of the power output (in
-              watts) relative to a cyclist's body weight. It is a critical
+              watts) relative to a cyclist&apos;s body weight. It is a critical
               metric in cycling and other endurance sports as it combines
               strength and endurance with efficiency. A higher W/kg means a
               cyclist can generate more power per unit of body weight, which is

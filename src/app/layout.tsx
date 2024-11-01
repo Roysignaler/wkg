@@ -2,7 +2,6 @@
 "use client";
 
 import { useEffect } from "react";
-import localFont from "next/font/local";
 import { Audiowide, Inter, Poppins } from "next/font/google";
 import "./globals.css";
 
