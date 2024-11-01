@@ -30,7 +30,6 @@ export default function Home() {
   }, [watts, kg]);
 
   const wpk = parseFloat(result.split(": ")[1]) || 0;
-  const kgValue = parseFloat(kg) || 1; // Ensure we handle kg being zero
 
   const { currentLevel, nextLevel } = (() => {
     const selectedLevels = (levels[gender as keyof typeof levels] || []).sort(
