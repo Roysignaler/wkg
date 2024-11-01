@@ -36,7 +36,7 @@ export default function Header() {
               <u>Give feedback</u>
             </a>{" "}
             or{" "}
-            <a href="https://twitter.com/intent/tweet?text=WattPerKilogram.App%20from%20@roysignaler%20%20%0A%0A">
+            <a href="https://twitter.com/intent/tweet?text=wkg.app%20from%20@roysignaler%20%20%0A%0A">
               <u>tweet it</u>
             </a>
             .
