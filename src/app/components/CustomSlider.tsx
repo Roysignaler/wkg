@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as Slider from "@radix-ui/react-slider";
+import { useTheme } from "./ThemeContext"; // Import useTheme to access theme context
 
 interface CustomSliderProps {
   value: number[];
@@ -7,7 +8,6 @@ interface CustomSliderProps {
   max: number;
   step: number;
   defaultValue: number;
-  isWarmTheme: boolean; // Add theme prop
 }
 
 export default function CustomSlider({
@@ -16,8 +16,9 @@ export default function CustomSlider({
   max,
   step,
   defaultValue,
-  isWarmTheme,
 }: CustomSliderProps) {
+  const { isWarmTheme } = useTheme(); // Access isWarmTheme from ThemeContext
+
   return (
     <Slider.Root
       value={value}
@@ -41,7 +42,6 @@ export default function CustomSlider({
         />
       </Slider.Track>
 
-      {/* Thumb - Draggable circle */}
       {/* Thumb - Draggable circle */}
       <Slider.Thumb
         className={`block h-5 w-5 rounded-full shadow-lg focus:outline-none focus:ring-2 ${

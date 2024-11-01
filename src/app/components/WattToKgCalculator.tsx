@@ -1,12 +1,12 @@
 // WattToKgCalculator.tsx
 "use client";
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import CustomSlider from "./CustomSlider";
 import CustomToggleGroup from "./CustomToggleGroup";
+import { useTheme } from "./ThemeContext"; // Import useTheme from ThemeContext
 
 interface WattToKgCalculatorProps {
-  isWarmTheme: boolean;
   result: string;
   setResult: Dispatch<SetStateAction<string>>;
   watts: string;
@@ -18,9 +18,7 @@ interface WattToKgCalculatorProps {
 }
 
 export default function WattToKgCalculator({
-  isWarmTheme,
   result,
-  setResult,
   watts,
   setWatts,
   kg,
@@ -28,15 +26,7 @@ export default function WattToKgCalculator({
   gender,
   setGender,
 }: WattToKgCalculatorProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Check window width to determine if device is mobile
-    const handleResize = () => setIsMobile(window.innerWidth < 1024);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const { isWarmTheme } = useTheme(); // Access isWarmTheme from ThemeContext
 
   const handleSliderChangeWatts = (value: number) => setWatts(value.toString());
   const handleSliderChangeKg = (value: number) => setKg(value.toString());
@@ -74,7 +64,6 @@ export default function WattToKgCalculator({
         max={750}
         step={1}
         defaultValue={160}
-        isWarmTheme={isWarmTheme}
       />
 
       {/* Kg Input */}
@@ -100,17 +89,12 @@ export default function WattToKgCalculator({
         max={200}
         step={1}
         defaultValue={90}
-        isWarmTheme={isWarmTheme}
       />
 
       {/* Gender Toggle Group */}
-      <CustomToggleGroup
-        value={gender}
-        onValueChange={setGender}
-        isWarmTheme={isWarmTheme}
-      />
+      <CustomToggleGroup value={gender} onValueChange={setGender} />
 
-      {/* Result HERE cause a spike in the load. Make a shadow or a solution for this */}
+      {/* Result */}
       {result && (
         <>
           <p

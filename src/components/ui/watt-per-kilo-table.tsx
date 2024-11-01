@@ -1,16 +1,16 @@
 import React from "react";
-
+import { useTheme } from "@/app/components/ThemeContext";
 interface CyclingPerformanceTableProps {
   result: number; // Pass W/kg result as a prop
   gender: string; // Pass gender as a prop
-  isWarmTheme: boolean;
 }
 
 const CyclingPerformanceTable = ({
   result,
   gender,
-  isWarmTheme,
 }: CyclingPerformanceTableProps) => {
+  const { isWarmTheme } = useTheme(); // Access isWarmTheme from ThemeContext
+
   const data = [
     { level: "World Class", maleWkg: "≥ 5.8", femaleWkg: "≥ 5.1" },
     { level: "Exceptional", maleWkg: "5.3 - 5.8", femaleWkg: "4.6 - 5.1" },
@@ -40,13 +40,13 @@ const CyclingPerformanceTable = ({
   ];
 
   // Helper function to check if result falls within a range
-  const isInRange = (range: string, result: number) => {
-    const [low, high] = range.split(" - ").map(parseFloat);
+  const isInRange = (range: string, result: number): boolean => {
     if (range.includes("≥")) {
       const min = parseFloat(range.replace("≥ ", ""));
       return result >= min;
     }
-    return result >= low && (high === undefined || result <= high);
+    const [low, high] = range.split(" - ").map(parseFloat);
+    return result >= low && result <= (high || Infinity);
   };
 
   return (
@@ -77,52 +77,31 @@ const CyclingPerformanceTable = ({
               (gender === "male" && isInRange(row.maleWkg, result)) ||
               (gender === "female" && isInRange(row.femaleWkg, result));
 
+            const rowClasses = isHighlighted
+              ? `${
+                  isWarmTheme
+                    ? "bg-[#F94807] text-white"
+                    : "bg-color-bright-100 text-white"
+                } font-bold`
+              : index % 2 === 0
+              ? "bg-white"
+              : "bg-gray-50";
+
+            const textColor = isHighlighted
+              ? "text-white"
+              : isWarmTheme
+              ? "text-[#F94807]"
+              : "text-[#0A1833]";
+
             return (
-              <tr
-                key={index}
-                className={`w-1/2 ${
-                  isHighlighted
-                    ? `${
-                        isWarmTheme
-                          ? "bg-[#F94807] text-white"
-                          : "bg-color-bright-100 text-white"
-                      } font-bold`
-                    : index % 2 === 0
-                    ? "bg-white"
-                    : "bg-gray-50"
-                }`}
-              >
-                <td
-                  className={`px-2 py-1 text-left ${
-                    isHighlighted
-                      ? "text-white"
-                      : isWarmTheme
-                      ? "text-[#F94807]"
-                      : "text-[#0A1833]"
-                  }`}
-                >
+              <tr key={index} className={`w-1/2 ${rowClasses}`}>
+                <td className={`px-2 py-1 text-left ${textColor}`}>
                   {row.level}
                 </td>
-                <td
-                  className={`w-1/6 px-1 py-1 text-center ${
-                    isHighlighted
-                      ? "text-white"
-                      : isWarmTheme
-                      ? "text-[#F94807]"
-                      : "text-[#0A1833]"
-                  }`}
-                >
+                <td className={`w-1/6 px-1 py-1 text-center ${textColor}`}>
                   {row.maleWkg}
                 </td>
-                <td
-                  className={`w-1/6 px-1 py-1 text-center ${
-                    isHighlighted
-                      ? "text-white"
-                      : isWarmTheme
-                      ? "text-[#F94807]"
-                      : "text-[#0A1833]"
-                  }`}
-                >
+                <td className={`w-1/6 px-1 py-1 text-center ${textColor}`}>
                   {row.femaleWkg}
                 </td>
               </tr>
