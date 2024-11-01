@@ -18,8 +18,6 @@ export default function Home() {
   const [kg, setKg] = useState("90");
   const [gender, setGender] = useState<"male" | "female">("male");
 
-  const toggleTheme = () => setIsWarmTheme((prev) => !prev);
-
   useEffect(() => {
     if (kg && watts) {
       const wpk = parseFloat(watts) / parseFloat(kg);
@@ -78,11 +76,7 @@ export default function Home() {
 
             {/* Left side - CyclingPerformanceTable component */}
             <div className="order-2 md:order-2 lg:order-1 p-0 py-4 px-0 flex lg:justify-start justify-center items-start overflow-y-auto">
-              <CyclingPerformanceTable
-                isWarmTheme={isWarmTheme}
-                result={wpk}
-                gender={gender}
-              />
+              <CyclingPerformanceTable result={wpk} gender={gender} />
             </div>
 
             {/* Right side - DataSummaryCard component */}
