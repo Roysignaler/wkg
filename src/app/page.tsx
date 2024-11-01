@@ -61,7 +61,7 @@ export default function Home() {
 
         {/* Main Content Area */}
         <main className=" overflow-y-auto w-full max-w-screen-xl mx-auto py-4 ">
-          {/* WattToKgCalculator component */}
+          {/* WattToKgCalculator component Nice */}
           <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 pb-0">
             <div className="order-1 md:order-1 lg:order-2 p-0 py-4 flex justify-center items-center">
               <WattToKgCalculator
