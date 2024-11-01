@@ -10,7 +10,7 @@ export default function Header() {
 
   useEffect(() => {
     // Hide the overlay after the animation completes
-    const timeout = setTimeout(() => setShowOverlay(false), 1800); // Match the animation duration
+    const timeout = setTimeout(() => setShowOverlay(false), 2100); // Match the animation duration
     return () => clearTimeout(timeout);
   }, []);
 

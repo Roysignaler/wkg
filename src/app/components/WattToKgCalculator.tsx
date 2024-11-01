@@ -95,17 +95,13 @@ export default function WattToKgCalculator({
       <CustomToggleGroup value={gender} onValueChange={setGender} />
 
       {/* Result */}
-      {result && (
-        <>
-          <p
-            className={`${
-              isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
-            } text-lg font-semibold`}
-          >
-            {result}
-          </p>
-        </>
-      )}
+      <p
+        className={`${
+          isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
+        } text-lg font-semibold fade-in ${result ? "loaded" : ""}`}
+      >
+        {result || "—"}
+      </p>
     </div>
   );
 }
