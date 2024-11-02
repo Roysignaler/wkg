@@ -16,27 +16,43 @@ export default function Footer() {
         }`}
       ></div>
 
-      <div className="grid grid-cols-3 gap-4 max-w-screen-xl mx-auto py-4 text-lg">
-        <div className="flex md:justify-start items-start">
-          <div>
+      <div className="max-w-screen-xl mx-auto py-4 text-lg">
+        {/* Layout for Desktop */}
+        <div className="hidden lg:grid lg:grid-cols-3 gap-4">
+          <div className="flex justify-start items-start">
             <h2 className="text-lg font-semibold">WKG © 2024</h2>
-            <p></p>
           </div>
-        </div>
-        <div className="flex lg:justify-center items-start">
-          <div>
+          <div className="flex justify-center items-start">
             <h2 className="text-lg font-semibold">
               Design and code by Stefan Frederiksen
             </h2>
           </div>
-        </div>
-        <div className="flex lg:justify-end items-start lg:items-end">
-          <div>
+          <div className="flex justify-end items-start">
             <h2 className="text-lg font-semibold">
               Feedback goes{" "}
               <a href="https://forms.gle/aDMDVmzJjn95rDT97">
                 <u>here</u>
               </a>
+            </h2>
+          </div>
+        </div>
+
+        {/* Layout for Mobile and Tablet */}
+        <div className="lg:hidden grid grid-cols-1 gap-4">
+          <div className="flex justify-start items-start">
+            <h2 className="text-lg font-semibold">WKG © 2024</h2>
+          </div>
+          <div className="flex justify-start items-start">
+            <h2 className="text-lg font-semibold">
+              Feedback goes{" "}
+              <a href="https://forms.gle/aDMDVmzJjn95rDT97">
+                <u>here</u>
+              </a>
+            </h2>
+          </div>
+          <div className="flex justify-start items-start">
+            <h2 className="text-lg font-semibold">
+              Design and code by Stefan Frederiksen
             </h2>
           </div>
         </div>

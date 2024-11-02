@@ -32,7 +32,7 @@ export default function InfoSection() {
   return (
     <>
       <Card>
-        <CardHeader className="lg:pl-0 pb-1">
+        <CardHeader className="lg:pl-0 pb-1 pr-0">
           <CardTitle
             onClick={() => toggleVisibility("whatIsWkg")}
             className="flex items-center cursor-pointer"
@@ -109,7 +109,7 @@ export default function InfoSection() {
       </Card>
 
       <Card>
-        <CardHeader className="pb-1 lg:pl-8">
+        <CardHeader className="pb-1 lg:pl-8 lg:pr-0">
           <CardTitle
             onClick={() => toggleVisibility("howToUseWkg")}
             className="flex items-center cursor-pointer"
@@ -129,7 +129,7 @@ export default function InfoSection() {
           </CardTitle>
         </CardHeader>
         {isVisible.howToUseWkg && (
-          <CardContent className="lg:pl-8">
+          <CardContent className="lg:pl-8 lg:pr-0">
             <p
               className={`text-justify ${
                 isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"

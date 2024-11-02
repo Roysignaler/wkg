@@ -49,7 +49,7 @@ export default function DataSummaryCard({
         isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
       }`}
     >
-      <CardHeader className="space-y-1 pb-3">
+      <CardHeader className="space-y-1 pb-3 lg:pr-0">
         <CardTitle
           className={`space-y-1 ${
             isWarmTheme ? "text-[#F94807]" : "text-[#0A1833]"
@@ -61,7 +61,7 @@ export default function DataSummaryCard({
           Review your current stats and level insights.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 lg:pr-0">
         <div
           className={`space-y-1 border-b-[5px] pb-5 ${
             isWarmTheme ? "border-[#F94807]" : "border-color-bright-100"
