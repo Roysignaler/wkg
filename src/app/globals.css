@@ -6,6 +6,8 @@
 
 body {
   font-family: var(--font-poppins), sans-serif;
+  background-color: #ffffff; /* or your desired background color */
+  color: #000000; /* Ensures text color contrasts with background */
 }
 
 @layer base {
